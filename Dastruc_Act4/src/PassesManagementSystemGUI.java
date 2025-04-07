@@ -205,19 +205,14 @@ public class PassesManagementSystemGUI extends JFrame {
         return button;
     }
 
-    /**
-     * Validates the customer name to ensure it doesn't contain numbers
-     * @param name The customer name to validate
-     * @return true if the name is valid (contains no numbers), false otherwise
-     */
     private boolean isValidName(String name) {
         if (name.isEmpty()) {
             return false;
         }
 
-        // Check if the name contains any digits
+        // Check if the name contains only letters and spaces
         for (char c : name.toCharArray()) {
-            if (Character.isDigit(c)) {
+            if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                 return false;
             }
         }
@@ -225,7 +220,7 @@ public class PassesManagementSystemGUI extends JFrame {
         return true;
     }
 
-    private void addGeneralCustomer() {
+   private void addGeneralCustomer() {
         String name = customerNameField.getText().trim();
 
         try {
@@ -234,7 +229,7 @@ public class PassesManagementSystemGUI extends JFrame {
                 if (name.isEmpty()) {
                     throw new IllegalArgumentException("Please enter a customer name");
                 } else {
-                    throw new IllegalArgumentException("Customer name cannot contain numbers");
+                    throw new IllegalArgumentException("Customer name can only contain letters and spaces");
                 }
             }
 
@@ -257,7 +252,7 @@ public class PassesManagementSystemGUI extends JFrame {
                 if (name.isEmpty()) {
                     throw new IllegalArgumentException("Please enter a customer name");
                 } else {
-                    throw new IllegalArgumentException("Customer name cannot contain numbers");
+                    throw new IllegalArgumentException("Customer name can only contain letters and spaces");
                 }
             }
 
@@ -270,7 +265,7 @@ public class PassesManagementSystemGUI extends JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }
-
+    
     private void serveVipCustomer() {
         if (!system.vipCustomer.isEmpty()) {
             String customer = system.vipCustomer.pop();
